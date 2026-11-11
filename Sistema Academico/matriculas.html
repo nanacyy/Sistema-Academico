@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Matrículas - Sistema Acadêmico</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <h1>Lista de Matrículas</h1>
+
+    <!-- Recipiente onde o JavaScript vai injetar os cartões de matrículas -->
+    <div id="lista-matriculas" class="lista-grid"></div>
+
+    <!-- Scripts necessários -->
+    <script src="js/dados.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
+
+
+<section>
+    <h2>Cadastrar Nova Matrícula</h2>
+    <form id="form-matricula">
+        <input type="text" id="aluno-matricula" placeholder="Nome do Aluno" required>
+        <input type="text" id="curso-matricula" placeholder="Nome do Curso" required>
+        <input type="text" id="turno-matricula" placeholder="Turno (ex: Manhã, Noite)" required>
+        <select id="status-matricula">
+            <option value="Ativa">Ativa</option>
+            <option value="Pendente">Pendente</option>
+            <option value="Trancada">Trancada</option>
+        </select>
+        <button type="submit">Adicionar Matrícula</button>
+    </form>
+</section>
+
+<hr>
+
+<div id="lista-matriculas" class="lista-grid"></div>
+
+
+<script src="js/dados.js"></script>
+<script src="js/app.js"></script>
