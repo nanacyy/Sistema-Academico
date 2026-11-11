@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Sistema Acadêmico - Rosa Elegante</title>
+    <style>
+        /* TEMA ROSA ELEGANTE */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 30px;
+            background-color: #fcf4f8;
+            color: #4a2c3d;
+        }
+
+        h1, h2, h3 {
+            color: #ad1457;
+        }
+
+        form {
+            margin-bottom: 25px;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(216, 27, 96, 0.05);
+            border: 1px solid #f8bbd0;
+        }
+
+        input, select, button {
+            padding: 10px 14px;
+            font-size: 14px;
+            border-radius: 6px;
+            border: 1px solid #f48fb1;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #e91e63;
+            box-shadow: 0 0 5px rgba(233, 30, 99, 0.2);
+        }
+
+        button {
+            background-color: #e91e63;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.2s ease;
+        }
+
+        button:hover {
+            background-color: #c2185b;
+        }
+
+        hr {
+            margin: 25px 0;
+            border: 0;
+            border-top: 1px solid #f8bbd0;
+        }
+
+        .lista-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: #fff;
+            border: 1px solid #f8bbd0;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(233, 30, 99, 0.06);
+            transition: transform 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(233, 30, 99, 0.1);
+        }
+
+        .card h3 {
+            margin-top: 0;
+            color: #ad1457;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Sistema de Gerenciamento Acadêmico</h1>
+
+    <!-- 1. DASHBOARD -->
+    <section>
+        <h2>Dashboard</h2>
+        <div class="lista-grid">
+            <div class="card">
+                <h3>Alunos</h3>
+                <p>Total: <span id="total-alunos">0</span></p>
+            </div>
+            <div class="card">
+                <h3>Cursos</h3>
+                <p>Total: <span id="total-cursos">0</span></p>
+            </div>
+            <div class="card">
+                <h3>Matrículas</h3>
+                <p>Total: <span id="total-matriculas">0</span></p>
+            </div>
+            <div class="card">
+                <h3>Usuários</h3>
+                <p>Total: <span id="total-usuarios">0</span></p>
+            </div>
+        </div>
+    </section>
+
+    <hr>
+
+    <!-- 2. GESTÃO DE ALUNOS -->
+    <section>
+        <h2>Gerenciamento de Alunos</h2>
+
+        <h3>Cadastrar Novo Aluno</h3>
+        <form id="form-aluno">
+            <input type="text" id="nome-aluno" placeholder="Nome do Aluno" required>
+            <input type="text" id="curso-aluno" placeholder="Curso" required>
+            <select id="status-aluno">
+                <option value="Ativo">Ativo</option>
+                <option value="Inativo">Inativo</option>
+            </select>
+            <button type="submit">Adicionar Aluno</button>
+        </form>
+
+        <h3>Filtrar Alunos</h3>
+        <div>
+            <label for="busca">Pesquisar por nome:</label>
+            <input type="text" id="busca" placeholder="Digite o nome...">
+            
+            <label for="filtro-status">Status:</label>
+            <select id="filtro-status">
+                <option value="">Todos</option>
+                <option value="Ativo">Ativo</option>
+                <option value="Inativo">Inativo</option>
+            </select>
+        </div>
+
+        <h3>Lista de Alunos</h3>
+        <div id="lista-alunos" class="lista-grid"></div>
+
+        <div id="detalhes-aluno" class="card" style="margin-top: 20px;">
+            <h3>Detalhes do Aluno</h3>
+            <p><strong>Nome:</strong> <span id="detalhe-nome">-</span></p>
+            <p><strong>Curso:</strong> <span id="detalhe-curso">-</span></p>
+            <p><strong>Status:</strong> <span id="detalhe-status">-</span></p>
+        </div>
+    </section>
+
+    <!-- SCRIPT INTEGRADO SEM DEPENDÊNCIA DE FICHEIROS EXTERNOS -->
+    <script>
+        // Dados Iniciais
+        const alunos = [
+            { id: 1, nome: "Ana Silva", curso: "Engenharia Informática", status: "Ativo" },
+            { id: 2, nome: "Bruno Costa", curso: "Gestão de Empresas", status: "Ativo" }
+        ];
+
+        const cursosCadastrados = [
+            { id: 1, nome: "Engenharia Informática", cargaHoraria: "360h" },
+            { id: 2, nome: "Gestão de Empresas", cargaHoraria: "300h" }
+        ];
+
+        const matriculas = [
+            { id: "MAT-202601", aluno: "Ana Silva", curso: "Engenharia Informática", data: "03/03/2026", turno: "Manhã", semestre: "1º Semestre", status: "Confirmada" }
+        ];
+
+        const usuarios = [
+            { id: 1, nome: "Administrador", email: "admin@escola.com", perfil: "Administrador" }
+        ];
+
+        // Funções do Sistema
+        function atualizarDashboard() {
+            const elAlunos = document.querySelector("#total-alunos");
+            const elCursos = document.querySelector("#total-cursos");
+            const elMatriculas = document.querySelector("#total-matriculas");
+            const elUsuarios = document.querySelector("#total-usuarios");
+
+            if (elAlunos) elAlunos.textContent = alunos.length;
+            if (elCursos) elCursos.textContent = cursosCadastrados.length;
+            if (elMatriculas) elMatriculas.textContent = matriculas.length;
+            if (elUsuarios) elUsuarios.textContent = usuarios.length;
+        }
+
+        function criarCardAluno(aluno) {
+            const cardAluno = document.createElement("article");
+            cardAluno.classList.add("card");
+
+            const nome = document.createElement("h3");
+            nome.textContent = aluno.nome;
+
+            const curso = document.createElement("p");
+            curso.textContent = `Curso: ${aluno.curso}`;
+
+            const status = document.createElement("p");
+            status.textContent = `Status: ${aluno.status}`;
+
+            const btnDetalhes = document.createElement("button");
+            btnDetalhes.textContent = "Ver detalhes";
+            btnDetalhes.style.marginRight = "8px";
+            btnDetalhes.addEventListener("click", () => exibirDetalhesAluno(aluno));
+
+            const btnRemover = document.createElement("button");
+            btnRemover.textContent = "Remover";
+            btnRemover.addEventListener("click", () => {
+                const index = alunos.findIndex(a => a.id === aluno.id);
+                if (index !== -1) {
+                    alunos.splice(index, 1);
+                    aplicarFiltros();
+                    atualizarDashboard();
+                }
+            });
+
+            cardAluno.append(nome, curso, status, btnDetalhes, btnRemover);
+            return cardAluno;
+        }
+
+        function renderizarAlunos(lista) {
+            const listaAlunosElemento = document.querySelector("#lista-alunos");
+            if (!listaAlunosElemento) return;
+
+            listaAlunosElemento.textContent = "";
+
+            for (const aluno of lista) {
+                const card = criarCardAluno(aluno);
+                listaAlunosElemento.append(card);
+            }
+        }
+
+        function aplicarFiltros() {
+            const campoBusca = document.querySelector("#busca");
+            const filtroStatus = document.querySelector("#filtro-status");
+
+            const termo = campoBusca ? campoBusca.value.toLowerCase() : "";
+            const statusSelecionado = filtroStatus ? filtroStatus.value.toLowerCase() : "";
+
+            const filtrados = alunos.filter((aluno) => {
+                const correspondeNome = aluno.nome.toLowerCase().includes(termo);
+                const correspondeStatus = statusSelecionado === "" || aluno.status.toLowerCase() === statusSelecionado;
+                return correspondeNome && correspondeStatus;
+            });
+
+            const listaAlunosElemento = document.querySelector("#lista-alunos");
+            if (!listaAlunosElemento) return;
+
+            listaAlunosElemento.textContent = "";
+
+            if (filtrados.length === 0) {
+                const mensagem = document.createElement("p");
+                mensagem.textContent = "Nenhum aluno encontrado.";
+                listaAlunosElemento.append(mensagem);
+            } else {
+                renderizarAlunos(filtrados);
+            }
+        }
+
+        function exibirDetalhesAluno(aluno) {
+            const elNome = document.querySelector("#detalhe-nome");
+            const elCurso = document.querySelector("#detalhe-curso");
+            const elStatus = document.querySelector("#detalhe-status");
+
+            if (elNome) elNome.textContent = aluno.nome;
+            if (elCurso) elCurso.textContent = aluno.curso;
+            if (elStatus) elStatus.textContent = aluno.status;
+        }
+
+        // Eventos
+        document.addEventListener("DOMContentLoaded", () => {
+            atualizarDashboard();
+            renderizarAlunos(alunos);
+
+            const formAluno = document.querySelector("#form-aluno");
+            if (formAluno) {
+                formAluno.addEventListener("submit", function(evento) {
+                    evento.preventDefault();
+
+                    const nomeInput = document.querySelector("#nome-aluno").value;
+                    const cursoInput = document.querySelector("#curso-aluno").value;
+                    const statusInput = document.querySelector("#status-aluno").value;
+
+                    const novoAluno = {
+                        id: alunos.length + 1,
+                        nome: nomeInput,
+                        curso: cursoInput,
+                        status: statusInput
+                    };
+
+                    alunos.push(novoAluno);
+                    aplicarFiltros();
+                    atualizarDashboard();
+                    formAluno.reset();
+                });
+            }
+
+            const campoBusca = document.querySelector("#busca");
+            const filtroStatus = document.querySelector("#filtro-status");
+            if (campoBusca) campoBusca.addEventListener("input", aplicarFiltros);
+            if (filtroStatus) filtroStatus.addEventListener("change", aplicarFiltros);
+        });
+    </script>
+</body>
+</html>
