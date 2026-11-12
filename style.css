@@ -1,5 +1,5 @@
 /* =========================================
-   1. Configurações Globais e Tema Rosa
+   Tema Rosa Elegante - Sistema Acadêmico
    ========================================= */
 * {
     margin: 0;
@@ -8,181 +8,145 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
-    background-color: #fff0f5; /* Fundo rosa bem clarinho (Lavender Blush) */
-    color: #4a2535; /* Texto escuro com leve tom vinho para contraste */
-    line-height: 1.6;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #fcf4f8;
+    color: #4a2c3d;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
 }
 
 header {
-    background-color: #d81b60; /* Rosa vibrante principal */
+    background-color: #d81b60;
     color: white;
     padding: 1rem 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
     box-shadow: 0 2px 6px rgba(216, 27, 96, 0.25);
+    flex-wrap: wrap;
+    gap: 1rem;
 }
 
 header h1 {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
+    color: white;
 }
 
 nav ul {
     list-style: none;
     display: flex;
-    gap: 1.5rem;
+    gap: 1rem;
+    flex-wrap: wrap;
 }
 
 nav a {
     color: white;
     text-decoration: none;
     font-weight: bold;
-    padding: 0.3rem 0.6rem;
+    padding: 0.4rem 0.8rem;
     border-radius: 4px;
     transition: background-color 0.2s;
+    font-size: 0.95rem;
 }
 
-nav a:hover {
-    background-color: #ad1457; /* Rosa mais escuro ao passar o mouse */
+nav a:hover, nav a.active {
+    background-color: #ad1457;
 }
 
 main {
     flex: 1;
-    padding: 2rem;
+    padding: 30px;
     max-width: 1200px;
     margin: 0 auto;
     width: 100%;
 }
 
-footer {
-    text-align: center;
-    padding: 1rem;
-    background-color: #fce4ec; /* Rodapé rosa pastel */
-    color: #880e4f;
-    font-size: 0.9rem;
-    border-top: 1px solid #f8bbd0;
+h2, h3 {
+    color: #ad1457;
+    margin-bottom: 15px;
 }
 
-/* =========================================
-   2. Grid e Cards do Sistema
-   ========================================= */
-.lista-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 1.5rem;
-    margin-top: 1.5rem;
-}
-
-.card {
-    background: white;
-    padding: 1.5rem;
-    border-radius: 10px;
-    border-top: 4px solid #f06292; /* Detalhe rosa no topo do card */
-    box-shadow: 0 3px 8px rgba(216, 27, 96, 0.1);
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 14px rgba(216, 27, 96, 0.18);
-}
-
-.card h3 {
-    color: #c2185b;
-    font-size: 1.2rem;
-}
-
-/* =========================================
-   3. Classes da Atividade (DOM e Estados)
-   ========================================= */
-/* Passo 16: Classe de destaque */
-.destaque {
-    border: 2px solid #d81b60;
-    background-color: #fce4ec;
-    font-weight: bold;
-}
-
-/* Passo 69: Classes de status */
-.status-ativo {
-    font-weight: bold;
-    color: #2e7d32;
-}
-
-.status-inativo {
-    opacity: 0.7;
-    color: #c62828;
-}
-
-/* Passo 76: Classe para evitar estilo inline no JS */
-.mensagem-erro {
-    color: #b71c1c;
-    background-color: #ffebee;
-    border: 1px solid #ef9a9a;
-    padding: 0.75rem;
-    border-radius: 6px;
-    margin-top: 1rem;
-    font-weight: bold;
-}
-
-/* =========================================
-   4. Formulários, Inputs e Botões
-   ========================================= */
 form {
-    background: white;
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 3px 8px rgba(216, 27, 96, 0.1);
+    margin-bottom: 25px;
     display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    max-width: 500px;
-    margin: 0 auto;
+    gap: 12px;
+    flex-wrap: wrap;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(216, 27, 96, 0.05);
+    border: 1px solid #f8bbd0;
 }
 
-label {
-    font-weight: bold;
-    font-size: 0.9rem;
-    color: #880e4f;
+input, select, button {
+    padding: 10px 14px;
+    font-size: 14px;
+    border-radius: 6px;
+    border: 1px solid #f48fb1;
 }
 
 input, select {
-    padding: 0.75rem;
-    border: 1px solid #f48fb1;
-    border-radius: 6px;
-    font-size: 1rem;
-    width: 100%;
-    background-color: #fff;
+    flex: 1;
+    min-width: 200px;
 }
 
 input:focus, select:focus {
     outline: none;
-    border-color: #d81b60;
-    box-shadow: 0 0 0 3px rgba(216, 27, 96, 0.15);
+    border-color: #e91e63;
+    box-shadow: 0 0 5px rgba(233, 30, 99, 0.2);
 }
 
 button {
     background-color: #e91e63;
     color: white;
-    padding: 0.75rem 1.5rem;
     border: none;
-    border-radius: 6px;
-    font-size: 1rem;
-    font-weight: bold;
     cursor: pointer;
-    transition: background-color 0.2s, transform 0.1s;
+    font-weight: 600;
+    transition: background 0.2s ease;
 }
 
 button:hover {
     background-color: #c2185b;
 }
 
-button:active {
-    transform: scale(0.98);
+hr {
+    margin: 25px 0;
+    border: 0;
+    border-top: 1px solid #f8bbd0;
+}
+
+.lista-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background: #fff;
+    border: 1px solid #f8bbd0;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(233, 30, 99, 0.06);
+    transition: transform 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(233, 30, 99, 0.1);
+}
+
+.card h3 {
+    margin-top: 0;
+    color: #ad1457;
+}
+
+footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: #fce4ec;
+    color: #880e4f;
+    font-size: 0.9rem;
+    border-top: 1px solid #f8bbd0;
+    margin-top: auto;
 }
