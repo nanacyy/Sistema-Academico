@@ -1,132 +1,175 @@
-// --- 1. DASHBOARD ---
-function atualizarDashboard() {
-    const elAlunos = document.querySelector("#total-alunos");
-    const elCursos = document.querySelector("#total-cursos");
-    const elMatriculas = document.querySelector("#total-matriculas");
-    const elUsuarios = document.querySelector("#total-usuarios");
-
-    if (elAlunos) elAlunos.textContent = alunos.length;
-    if (elCursos) elCursos.textContent = cursosCadastrados.length;
-    if (elMatriculas) elMatriculas.textContent = matriculas.length;
-    if (elUsuarios) elUsuarios.textContent = usuarios.length;
+/* =========================================
+   1. Configurações Globais e Variáveis
+   ========================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-// --- 2. RENDERIZAÇÃO E CARDS DE ALUNOS ---
-function criarCardAluno(aluno) {
-    const cardAluno = document.createElement("article");
-    cardAluno.classList.add("card");
-
-    const nome = document.createElement("h3");
-    nome.textContent = aluno.nome;
-
-    const curso = document.createElement("p");
-    curso.textContent = `Curso: ${aluno.curso}`;
-
-    const status = document.createElement("p");
-    status.textContent = `Status: ${aluno.status}`;
-
-    const btnDetalhes = document.createElement("button");
-    btnDetalhes.textContent = "Ver detalhes";
-    btnDetalhes.addEventListener("click", () => exibirDetalhesAluno(aluno));
-
-    const btnRemover = document.createElement("button");
-    btnRemover.textContent = "Remover";
-    btnRemover.addEventListener("click", () => {
-        const index = alunos.findIndex(a => a.id === aluno.id);
-        if (index !== -1) {
-            alunos.splice(index, 1);
-            aplicarFiltros();
-            atualizarDashboard();
-        }
-    });
-
-    cardAluno.append(nome, curso, status, btnDetalhes, btnRemover);
-    return cardAluno;
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f9;
+    color: #333;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
-function renderizarAlunos(lista) {
-    const listaAlunosElemento = document.querySelector("#lista-alunos");
-    if (!listaAlunosElemento) return;
-
-    listaAlunosElemento.textContent = "";
-
-    for (const aluno of lista) {
-        const card = criarCardAluno(aluno);
-        listaAlunosElemento.append(card);
-    }
+header {
+    background-color: #004080;
+    color: white;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-// --- 3. CADASTRO DE ALUNOS (Apenas UMA declaração) ---
-const formAluno = document.querySelector("#form-aluno");
-
-if (formAluno) {
-    formAluno.addEventListener("submit", function(evento) {
-        evento.preventDefault();
-
-        const nomeInput = document.querySelector("#nome-aluno").value;
-        const cursoInput = document.querySelector("#curso-aluno").value;
-        const statusInput = document.querySelector("#status-aluno").value;
-
-        const novoAluno = {
-            id: alunos.length + 1,
-            nome: nomeInput,
-            curso: cursoInput,
-            status: statusInput
-        };
-
-        alunos.push(novoAluno);
-        aplicarFiltros();
-        atualizarDashboard();
-        formAluno.reset();
-    });
+header h1 {
+    font-size: 1.5rem;
 }
 
-// --- 4. FILTROS E BUSCA ---
-const campoBusca = document.querySelector("#busca");
-const filtroStatus = document.querySelector("#filtro-status");
-
-function aplicarFiltros() {
-    const termo = campoBusca ? campoBusca.value.toLowerCase() : "";
-    const statusSelecionado = filtroStatus ? filtroStatus.value.toLowerCase() : "";
-
-    const filtrados = alunos.filter((aluno) => {
-        const correspondeNome = aluno.nome.toLowerCase().includes(termo);
-        const correspondeStatus = statusSelecionado === "" || aluno.status.toLowerCase() === statusSelecionado;
-        return correspondeNome && correspondeStatus;
-    });
-
-    const listaAlunosElemento = document.querySelector("#lista-alunos");
-    if (!listaAlunosElemento) return;
-
-    listaAlunosElemento.textContent = "";
-
-    if (filtrados.length === 0) {
-        const mensagem = document.createElement("p");
-        mensagem.textContent = "Nenhum aluno encontrado.";
-        listaAlunosElemento.append(mensagem);
-    } else {
-        renderizarAlunos(filtrados);
-    }
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
 }
 
-if (campoBusca) campoBusca.addEventListener("input", aplicarFiltros);
-if (filtroStatus) filtroStatus.addEventListener("change", aplicarFiltros);
-
-// --- 5. DETALHES DO ALUNO ---
-function exibirDetalhesAluno(aluno) {
-    const elNome = document.querySelector("#detalhe-nome");
-    const elCurso = document.querySelector("#detalhe-curso");
-    const elStatus = document.querySelector("#detalhe-status");
-
-    if (elNome) elNome.textContent = aluno.nome;
-    if (elCurso) elCurso.textContent = aluno.curso;
-    if (elStatus) elStatus.textContent = aluno.status;
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: opacity 0.2s;
 }
 
-// Inicialização ao carregar a página
-document.addEventListener("DOMContentLoaded", () => {
-    atualizarDashboard();
-    if (document.querySelector("#lista-alunos")) {
-        renderizarAlunos(alunos);
-    }
-});
+nav a:hover {
+    opacity: 0.8;
+}
+
+main {
+    flex: 1;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: #e9ecef;
+    color: #6c757d;
+    font-size: 0.9rem;
+}
+
+/* =========================================
+   2. Componentes e Layouts (Grid de Cards)
+   ========================================= */
+.lista-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.card h3 {
+    color: #004080;
+    font-size: 1.2rem;
+}
+
+/* =========================================
+   3. Classes Utilitárias e Estados (DOM)
+   ========================================= */
+/* Utilizada nos passos 16 a 20 para manipulação com classList */
+.destaque {
+    border: 2px solid currentColor;
+    font-weight: bold;
+}
+
+/* Utilizadas no passo 69 */
+.status-ativo {
+    font-weight: bold;
+    color: #28a745;
+}
+
+.status-inativo {
+    opacity: 0.7;
+    color: #dc3545;
+}
+
+/* Utilizada no passo 76 para evitar estilos inline */
+.mensagem-erro {
+    color: #dc3545;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    padding: 0.75rem;
+    border-radius: 4px;
+    margin-top: 1rem;
+}
+
+/* =========================================
+   4. Formulários e Botões
+   ========================================= */
+form {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+label {
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+input, select {
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    width: 100%;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: #004080;
+    box-shadow: 0 0 0 3px rgba(0, 64, 128, 0.1);
+}
+
+button {
+    background-color: #004080;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+button:hover {
+    background-color: #002b5c;
+}
