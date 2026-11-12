@@ -6,14 +6,12 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-
-    <!-- CABEÇALHO COM ABAS DE NAVEGAÇÃO -->
     <header>
         <h1>Sistema Acadêmico</h1>
         <nav>
             <ul>
                 <li><a href="index.html">Início</a></li>
-                <li><a href="alunos.html" class="active" id="link-alunos">Alunos</a></li>
+                <li><a href="alunos.html" class="active">Alunos</a></li>
                 <li><a href="cursos.html">Cursos</a></li>
                 <li><a href="matriculas.html">Matrículas</a></li>
                 <li><a href="usuarios.html">Usuários</a></li>
@@ -22,10 +20,9 @@
     </header>
 
     <main>
-        <!-- SEÇÃO DE CADASTRO DE ALUNO -->
-        <section>
-            <h2>Gerenciamento de Alunos</h2>
+        <h2>Gerenciamento de Alunos</h2>
 
+        <section>
             <h3>Cadastrar Novo Aluno</h3>
             <form id="form-aluno">
                 <input type="text" id="nome-aluno" placeholder="Nome do Aluno" required>
@@ -38,19 +35,16 @@
             </form>
         </section>
 
-        <hr>
-
-        <!-- SEÇÃO DE FILTROS -->
         <section>
-            <h2>Filtrar Alunos</h2>
-            <div class="filtros-container" style="display: flex; gap: 15px; flex-wrap: wrap; margin-bottom: 20px; background: #ffffff; padding: 15px; border-radius: 8px; border: 1px solid #f8bbd0; align-items: center;">
-                <div style="display: flex; flex-direction: column; gap: 5px; flex: 1; min-width: 220px;">
-                    <label for="busca" style="font-size: 0.85rem; font-weight: bold; color: #880e4f;">Pesquisar por nome:</label>
-                    <input id="busca" type="search" placeholder="Digite o nome">
+            <h3>Filtrar Alunos</h3>
+            <div style="display: flex; gap: 15px; flex-wrap: wrap; margin-bottom: 20px;">
+                <div style="flex: 1;">
+                    <label for="busca">Pesquisar por nome:</label>
+                    <input id="busca" type="search" placeholder="Digite o nome" style="width: 100%;">
                 </div>
-                <div style="display: flex; flex-direction: column; gap: 5px; flex: 1; min-width: 220px;">
-                    <label for="filtro-status" style="font-size: 0.85rem; font-weight: bold; color: #880e4f;">Status:</label>
-                    <select id="filtro-status">
+                <div style="flex: 1;">
+                    <label for="filtro-status">Status:</label>
+                    <select id="filtro-status" style="width: 100%;">
                         <option value="">Todos</option>
                         <option value="ativo">Ativo</option>
                         <option value="inativo">Inativo</option>
@@ -59,8 +53,7 @@
             </div>
         </section>
 
-        <!-- ÁREA DE DETALHES DO ALUNO -->
-        <section id="detalhes-aluno" class="card" style="margin: 20px 0; padding: 15px; border: 1px solid #f8bbd0;">
+        <section id="detalhes-aluno" class="card" style="margin: 20px 0;">
             <h3>Detalhes do Aluno</h3>
             <p><strong>Nome:</strong> <span id="detalhe-nome">-</span></p>
             <p><strong>Curso:</strong> <span id="detalhe-curso">-</span></p>
@@ -69,7 +62,6 @@
 
         <hr>
 
-        <!-- LISTA DE ALUNOS -->
         <section>
             <h3>Lista de Alunos</h3>
             <div id="lista-alunos" class="lista-grid"></div>
@@ -77,10 +69,9 @@
     </main>
 
     <footer>
-        <p>Sistema Acadêmico - Desenvolvido com Tema Rosa Elegante</p>
+        <p>Sistema Acadêmico - Desenvolvimento Web I</p>
     </footer>
 
-    <!-- Scripts necessários -->
     <script src="js/dados.js"></script>
     <script src="js/app.js"></script>
 </body>
