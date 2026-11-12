@@ -1,5 +1,5 @@
 /* =========================================
-   1. Configurações Globais e Variáveis
+   1. Configurações Globais e Tema Rosa
    ========================================= */
 * {
     margin: 0;
@@ -9,8 +9,8 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f6f9;
-    color: #333;
+    background-color: #fff0f5; /* Fundo rosa bem clarinho (Lavender Blush) */
+    color: #4a2535; /* Texto escuro com leve tom vinho para contraste */
     line-height: 1.6;
     display: flex;
     flex-direction: column;
@@ -18,12 +18,13 @@ body {
 }
 
 header {
-    background-color: #004080;
+    background-color: #d81b60; /* Rosa vibrante principal */
     color: white;
     padding: 1rem 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    box-shadow: 0 2px 6px rgba(216, 27, 96, 0.25);
 }
 
 header h1 {
@@ -40,11 +41,13 @@ nav a {
     color: white;
     text-decoration: none;
     font-weight: bold;
-    transition: opacity 0.2s;
+    padding: 0.3rem 0.6rem;
+    border-radius: 4px;
+    transition: background-color 0.2s;
 }
 
 nav a:hover {
-    opacity: 0.8;
+    background-color: #ad1457; /* Rosa mais escuro ao passar o mouse */
 }
 
 main {
@@ -58,13 +61,14 @@ main {
 footer {
     text-align: center;
     padding: 1rem;
-    background-color: #e9ecef;
-    color: #6c757d;
+    background-color: #fce4ec; /* Rodapé rosa pastel */
+    color: #880e4f;
     font-size: 0.9rem;
+    border-top: 1px solid #f8bbd0;
 }
 
 /* =========================================
-   2. Componentes e Layouts (Grid de Cards)
+   2. Grid e Cards do Sistema
    ========================================= */
 .lista-grid {
     display: grid;
@@ -76,8 +80,9 @@ footer {
 .card {
     background: white;
     padding: 1.5rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    border-top: 4px solid #f06292; /* Detalhe rosa no topo do card */
+    box-shadow: 0 3px 8px rgba(216, 27, 96, 0.1);
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
@@ -86,52 +91,54 @@ footer {
 
 .card:hover {
     transform: translateY(-3px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 6px 14px rgba(216, 27, 96, 0.18);
 }
 
 .card h3 {
-    color: #004080;
+    color: #c2185b;
     font-size: 1.2rem;
 }
 
 /* =========================================
-   3. Classes Utilitárias e Estados (DOM)
+   3. Classes da Atividade (DOM e Estados)
    ========================================= */
-/* Utilizada nos passos 16 a 20 para manipulação com classList */
+/* Passo 16: Classe de destaque */
 .destaque {
-    border: 2px solid currentColor;
+    border: 2px solid #d81b60;
+    background-color: #fce4ec;
     font-weight: bold;
 }
 
-/* Utilizadas no passo 69 */
+/* Passo 69: Classes de status */
 .status-ativo {
     font-weight: bold;
-    color: #28a745;
+    color: #2e7d32;
 }
 
 .status-inativo {
     opacity: 0.7;
-    color: #dc3545;
+    color: #c62828;
 }
 
-/* Utilizada no passo 76 para evitar estilos inline */
+/* Passo 76: Classe para evitar estilo inline no JS */
 .mensagem-erro {
-    color: #dc3545;
-    background-color: #f8d7da;
-    border: 1px solid #f5c6cb;
+    color: #b71c1c;
+    background-color: #ffebee;
+    border: 1px solid #ef9a9a;
     padding: 0.75rem;
-    border-radius: 4px;
+    border-radius: 6px;
     margin-top: 1rem;
+    font-weight: bold;
 }
 
 /* =========================================
-   4. Formulários e Botões
+   4. Formulários, Inputs e Botões
    ========================================= */
 form {
     background: white;
     padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    box-shadow: 0 3px 8px rgba(216, 27, 96, 0.1);
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -142,34 +149,40 @@ form {
 label {
     font-weight: bold;
     font-size: 0.9rem;
+    color: #880e4f;
 }
 
 input, select {
     padding: 0.75rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    border: 1px solid #f48fb1;
+    border-radius: 6px;
     font-size: 1rem;
     width: 100%;
+    background-color: #fff;
 }
 
 input:focus, select:focus {
     outline: none;
-    border-color: #004080;
-    box-shadow: 0 0 0 3px rgba(0, 64, 128, 0.1);
+    border-color: #d81b60;
+    box-shadow: 0 0 0 3px rgba(216, 27, 96, 0.15);
 }
 
 button {
-    background-color: #004080;
+    background-color: #e91e63;
     color: white;
     padding: 0.75rem 1.5rem;
     border: none;
-    border-radius: 4px;
+    border-radius: 6px;
     font-size: 1rem;
     font-weight: bold;
     cursor: pointer;
-    transition: background-color 0.2s;
+    transition: background-color 0.2s, transform 0.1s;
 }
 
 button:hover {
-    background-color: #002b5c;
+    background-color: #c2185b;
+}
+
+button:active {
+    transform: scale(0.98);
 }
