@@ -2,41 +2,58 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Lista de Usuários - Sistema Acadêmico</title>
+    <title>Usuários - Sistema Acadêmico</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <h1>Lista de Usuários</h1>
 
-    <!-- Recipiente onde o JavaScript vai injetar os cartões dos usuários -->
-    <div id="lista-usuarios" class="lista-grid"></div>
+    <!-- CABEÇALHO COM ABAS DE NAVEGAÇÃO -->
+    <header>
+        <h1>Sistema Acadêmico</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Início</a></li>
+                <li><a href="alunos.html" id="link-alunos">Alunos</a></li>
+                <li><a href="cursos.html">Cursos</a></li>
+                <li><a href="matriculas.html">Matrículas</a></li>
+                <li><a href="usuarios.html" class="active">Usuários</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- SEÇÃO DE CADASTRO -->
+        <section>
+            <h2>Gerenciamento de Usuários</h2>
+
+            <h3>Cadastrar Novo Usuário</h3>
+            <form id="form-usuario">
+                <input type="text" id="nome-usuario" placeholder="Nome Completo" required>
+                <input type="email" id="email-usuario" placeholder="E-mail" required>
+                <select id="perfil-usuario">
+                    <option value="Administrador">Administrador</option>
+                    <option value="Professor">Professor</option>
+                    <option value="Atendimento">Atendimento</option>
+                </select>
+                <button type="submit">Adicionar Usuário</button>
+            </form>
+        </section>
+
+        <hr>
+
+        <!-- SEÇÃO DE LISTAGEM -->
+        <section>
+            <h3>Lista de Usuários</h3>
+            <div id="lista-usuarios" class="lista-grid"></div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Sistema Acadêmico - Desenvolvido com Tema Rosa Elegante</p>
+    </footer>
 
     <!-- Scripts necessários -->
     <script src="js/dados.js"></script>
     <script src="js/app.js"></script>
 </body>
 </html>
-
-
-
-<section>
-    <h2>Cadastrar Novo Usuário</h2>
-    <form id="form-usuario">
-        <input type="text" id="nome-usuario" placeholder="Nome Completo" required>
-        <input type="email" id="email-usuario" placeholder="E-mail" required>
-        <select id="perfil-usuario">
-            <option value="Administrador">Administrador</option>
-            <option value="Professor">Professor</option>
-            <option value="Atendimento">Atendimento</option>
-        </select>
-        <button type="submit">Adicionar Usuário</button>
-    </form>
-</section>
-
-<hr>
-
-<div id="lista-usuarios" class="lista-grid"></div>
-
-
-<script src="js/dados.js"></script>
-<script src="js/app.js"></script>
