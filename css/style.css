@@ -116,10 +116,27 @@ hr {
     border-top: 1px solid #f8bbd0;
 }
 
+/* =========================================
+   CSS Grid (Atividade 11)
+   ========================================= */
+
+/* Grid do Dashboard (4 colunas) */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Atividade 3: 4 colunas iguais[cite: 52, 53] */
+    gap: 16px; /* Atividade 6: Espaçamento entre os cards[cite: 53] */
+}
+
+/* Card em Destaque (Atividade 8) */
+.card-destaque {
+    grid-column: span 2; /* O card ocupa 2 colunas da grade[cite: 53] */
+}
+
+/* Grid das Listagens Gerais (Alunos, Cursos, etc. - 3 colunas) */
 .lista-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(3, 1fr); /* Atividade 10[cite: 53, 54] */
+    gap: 16px;
 }
 
 .card {
