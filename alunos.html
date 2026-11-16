@@ -1,79 +1,61 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <title>Alunos - Sistema Acadêmico</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-    <header>
-        <h1>Sistema Acadêmico</h1>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Alunos - Sistema Acadêmico</title>
+        <link rel="stylesheet" href="css/style.css" />
+    </head>
+    <body>
+        <header class="cabecalho">
+            <h1 id="titulo-sistema">SISTEMA DE GERENCIAMENTO ACADÊMICO</h1>
+            <span>Área Acadêmica</span>
+        </header>
         <nav>
             <ul>
-                <li><a href="index.html">Início</a></li>
-                <li><a href="alunos.html" class="active">Alunos</a></li>
+                <li><a href="index.html">Dashboard</a></li>
+                <li><a href="alunos.html">Alunos</a></li>
                 <li><a href="cursos.html">Cursos</a></li>
                 <li><a href="matriculas.html">Matrículas</a></li>
                 <li><a href="usuarios.html">Usuários</a></li>
             </ul>
         </nav>
-    </header>
-
-    <main>
-        <h2>Gerenciamento de Alunos</h2>
-
-        <section>
-            <h3>Cadastrar Novo Aluno</h3>
-            <form id="form-aluno">
-                <input type="text" id="nome-aluno" placeholder="Nome do Aluno" required>
-                <input type="text" id="curso-aluno" placeholder="Curso" required>
-                <select id="status-aluno">
-                    <option value="ativo">Ativo</option>
-                    <option value="inativo">Inativo</option>
-                </select>
-                <button type="submit">Adicionar Aluno</button>
-            </form>
-        </section>
-
-        <section>
-            <h3>Filtrar Alunos</h3>
-            <div style="display: flex; gap: 15px; flex-wrap: wrap; margin-bottom: 20px;">
-                <div style="flex: 1;">
-                    <label for="busca">Pesquisar por nome:</label>
-                    <input id="busca" type="search" placeholder="Digite o nome" style="width: 100%;">
+        <main>
+            <section class="painel">
+                <div class="cabecalho-secao">
+                    <div>
+                        <h2>ALUNOS</h2>
+                        <p>Consulte, filtre e gerencie os alunos cadastrados.</p>
+                    </div>
+                    <a class="botao" href="aluno-form.html">+ Novo aluno</a>
                 </div>
-                <div style="flex: 1;">
-                    <label for="filtro-status">Status:</label>
-                    <select id="filtro-status" style="width: 100%;">
-                        <option value="">Todos</option>
-                        <option value="ativo">Ativo</option>
-                        <option value="inativo">Inativo</option>
-                    </select>
+                <div class="filtros">
+                    <div>
+                        <label for="busca">Buscar aluno</label
+                        ><input id="busca" type="search" placeholder="Digite o nome do aluno" />
+                    </div>
+                    <div>
+                        <label for="filtro-status">Status</label
+                        ><select id="filtro-status">
+                            <option value="">Todos</option>
+                            <option value="ativo">Ativo</option>
+                            <option value="inativo">Inativo</option>
+                        </select>
+                    </div>
+                    <button type="button" id="btn-atualizar" class="botao-secundario">Atualizar lista</button>
                 </div>
-            </div>
-        </section>
-
-        <section id="detalhes-aluno" class="card" style="margin: 20px 0;">
-            <h3>Detalhes do Aluno</h3>
-            <p><strong>Nome:</strong> <span id="detalhe-nome">-</span></p>
-            <p><strong>Curso:</strong> <span id="detalhe-curso">-</span></p>
-            <p><strong>Status:</strong> <span id="detalhe-status">-</span></p>
-        </section>
-
-        <hr>
-
-        <section>
-            <h3>Lista de Alunos</h3>
-            <div id="lista-alunos" class="lista-grid"></div>
-        </section>
-    </main>
-
-    <footer>
-        <p>Sistema Acadêmico - Desenvolvimento Web I</p>
-    </footer>
-
-  <script src="js/dados.js"></script>
-    <script src="js/storage.js"></script>
-    <script src="js/app.js"></script>
-</body>
+                <div id="lista-alunos" class="lista-grid"></div>
+                <section id="detalhes-aluno" class="detalhes">
+                    <h2>Detalhes do Aluno</h2>
+                    <p id="detalhe-nome">Selecione “Ver detalhes” em um aluno.</p>
+                    <p id="detalhe-curso"></p>
+                    <p id="detalhe-status"></p>
+                </section>
+            </section>
+        </main>
+        <footer><p>© 2026 Sistema de Gerenciamento Acadêmico. Todos os direitos reservados.</p></footer>
+        <script src="js/dados.js"></script>
+        <script src="js/storage.js"></script>
+        <script src="js/app.js"></script>
+    </body>
 </html>
