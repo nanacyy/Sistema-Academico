@@ -1,169 +1,294 @@
-/* =========================================
-   Tema Rosa Elegante - Sistema Acadêmico
-   ========================================= */
+
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+:root {
+  font-family: 'Arial', Helvetica, sans-serif;
+  color: #593b50;
+  background: #fff5fa;
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #fcf4f8;
-    color: #4a2c3d;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-header {
-    background-color: #d81b60;
-    color: white;
-    padding: 1rem 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 2px 6px rgba(216, 27, 96, 0.25);
-    flex-wrap: wrap;
-    gap: 1rem;
+/* CABEÇALHO */
+.cabecalho {
+  background: linear-gradient(135deg, #f4a6c9, #e96ba8, #d94b91);
+  color: #fff;
+  padding: 22px max(5%, calc((100% - 1100px)/2));
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  box-shadow: 0 4px 15px rgba(217, 75, 145, .18);
 }
 
-header h1 {
-    font-size: 1.4rem;
-    color: white;
+.cabecalho h1 {
+  margin: 0;
+  font-size: 1.35rem;
+  letter-spacing: .6px;
+}
+
+.cabecalho span {
+  color: #fff0f7;
+}
+
+/* NAVEGAÇÃO */
+nav {
+  background: #fff;
+  border-bottom: 1px solid #f4d6e5;
 }
 
 nav ul {
-    list-style: none;
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
+  max-width: 1100px;
+  margin: auto;
+  padding: 0 20px;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
 nav a {
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-    padding: 0.4rem 0.8rem;
-    border-radius: 4px;
-    transition: background-color 0.2s;
-    font-size: 0.95rem;
+  display: block;
+  padding: 15px 13px;
+  color: #c34e87;
+  text-decoration: none;
+  font-weight: 600;
+  transition: .25s ease;
 }
 
-nav a:hover, nav a.active {
-    background-color: #ad1457;
+nav a:hover,
+nav a:focus {
+  background: #ffe4f0;
+  color: #d63384;
+  border-radius: 8px;
 }
 
+/* CONTEÚDO */
 main {
-    flex: 1;
-    padding: 30px;
-    max-width: 1200px;
-    margin: 0 auto;
-    width: 100%;
+  width: min(1100px, 92%);
+  margin: 32px auto;
+  flex: 1;
 }
 
-h2, h3 {
-    color: #ad1457;
-    margin-bottom: 15px;
+.painel {
+  background: #fff;
+  border: 1px solid #f3d5e4;
+  border-radius: 16px;
+  padding: 26px;
+  box-shadow: 0 5px 20px rgba(214, 92, 151, .08);
 }
 
-form {
-    margin-bottom: 25px;
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-    background: #ffffff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(216, 27, 96, 0.05);
-    border: 1px solid #f8bbd0;
+h2 {
+  margin-top: 0;
+  color: #d94b91;
 }
 
-input, select, button {
-    padding: 10px 14px;
-    font-size: 14px;
-    border-radius: 6px;
-    border: 1px solid #f48fb1;
+p {
+  line-height: 1.5;
 }
 
-input, select {
-    flex: 1;
-    min-width: 200px;
-}
-
-input:focus, select:focus {
-    outline: none;
-    border-color: #e91e63;
-    box-shadow: 0 0 5px rgba(233, 30, 99, 0.2);
-}
-
-button {
-    background-color: #e91e63;
-    color: white;
-    border: none;
-    cursor: pointer;
-    font-weight: 600;
-    transition: background 0.2s ease;
-}
-
-button:hover {
-    background-color: #c2185b;
-}
-
-hr {
-    margin: 25px 0;
-    border: 0;
-    border-top: 1px solid #f8bbd0;
-}
-
-/* =========================================
-   CSS Grid (Atividade 11)
-   ========================================= */
-
-/* Grid do Dashboard (4 colunas) */
-.dashboard-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr); /* Atividade 3: 4 colunas iguais[cite: 52, 53] */
-    gap: 16px; /* Atividade 6: Espaçamento entre os cards[cite: 53] */
-}
-
-/* Card em Destaque (Atividade 8) */
-.card-destaque {
-    grid-column: span 2; /* O card ocupa 2 colunas da grade[cite: 53] */
-}
-
-/* Grid das Listagens Gerais (Alunos, Cursos, etc. - 3 colunas) */
+/* GRID E CARDS */
 .lista-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); /* Atividade 10[cite: 53, 54] */
-    gap: 16px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin-top: 20px;
 }
 
 .card {
-    background: #fff;
-    border: 1px solid #f8bbd0;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(233, 30, 99, 0.06);
-    transition: transform 0.2s ease;
+  background: #fffafd;
+  border: 1px solid #f2d3e3;
+  border-radius: 14px;
+  padding: 18px;
+  box-shadow: 0 3px 12px rgba(214, 92, 151, .07);
+  transition: transform .25s ease, box-shadow .25s ease;
 }
 
 .card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(233, 30, 99, 0.1);
+  transform: translateY(-4px);
+  box-shadow: 0 7px 18px rgba(214, 92, 151, .15);
 }
 
 .card h3 {
-    margin-top: 0;
-    color: #ad1457;
+  margin: 0 0 10px;
+  color: #d94b91;
 }
 
+.card p {
+  margin: 7px 0;
+}
+
+/* INDICADORES */
+.indicador {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.indicador strong {
+  font-size: 2.1rem;
+  color: #e65b9e;
+}
+
+.indicador a {
+  color: #c34e87;
+  font-weight: 600;
+}
+
+/* BOTÕES */
+.cabecalho-secao {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.botao,
+button {
+  display: inline-block;
+  border: 0;
+  border-radius: 9px;
+  padding: 11px 16px;
+  background: linear-gradient(135deg, #ec83b5, #d94b91);
+  color: white;
+  font: inherit;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 3px 9px rgba(217, 75, 145, .18);
+  transition: .25s ease;
+}
+
+button:hover,
+.botao:hover {
+  filter: brightness(.95);
+  transform: translateY(-2px);
+}
+
+.botao-secundario {
+  background: #ffe5f0;
+  color: #c34e87;
+  box-shadow: none;
+}
+
+/* FILTROS E FORMULÁRIOS */
+.filtros,
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 16px;
+  align-items: end;
+  margin-top: 18px;
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 7px;
+  color: #a84478;
+}
+
+input,
+select {
+  width: 100%;
+  border: 1px solid #edc5d9;
+  border-radius: 9px;
+  padding: 11px;
+  font: inherit;
+  background: #fffafd;
+  color: #593b50;
+  transition: .2s ease;
+}
+
+input:focus,
+select:focus {
+  outline: 2px solid #f6b5d2;
+  border-color: #df6ba4;
+  background: #fff;
+}
+
+/* AÇÕES */
+.acoes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+/* STATUS */
+.status {
+  display: inline-block;
+  padding: 4px 9px;
+  border-radius: 20px;
+  background: #ffe5f0;
+  color: #bd4b83;
+  font-size: .85rem;
+}
+
+.status-ativo {
+  color: #43865d;
+  background: #e6f6eb;
+  font-weight: bold;
+}
+
+.status-inativo {
+  color: #8b7c85;
+  background: #f4edf1;
+  opacity: .85;
+}
+
+.destaque {
+  border: 2px solid currentColor;
+  font-weight: bold;
+}
+
+/* DETALHES E MENSAGENS */
+.detalhes {
+  margin-top: 28px;
+  padding: 18px;
+  background: #fff0f7;
+  border-radius: 12px;
+}
+
+.mensagem-vazia {
+  padding: 18px;
+  background: #fff7e9;
+  border: 1px solid #f3d9a8;
+  border-radius: 10px;
+}
+
+.mensagem-erro {
+  color: #c03964;
+  font-weight: bold;
+}
+
+/* RODAPÉ */
 footer {
-    text-align: center;
-    padding: 1rem;
-    background-color: #fce4ec;
-    color: #880e4f;
-    font-size: 0.9rem;
-    border-top: 1px solid #f8bbd0;
-    margin-top: auto;
+  text-align: center;
+  padding: 18px;
+  background: #fce4ef;
+  color: #a75c7e;
+  font-size: .9rem;
+  border-top: 1px solid #f3d1e1;
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 600px) {
+  .cabecalho,
+  .cabecalho-secao {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .painel {
+    padding: 18px;
+  }
 }
