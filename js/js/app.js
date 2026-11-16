@@ -1,3 +1,4 @@
+
 console.log("Aula 10 - DOM iniciado.");
 
 let alunos = carregarDados(STORAGE_KEYS.alunos, alunosIniciais);
@@ -204,6 +205,7 @@ function iniciarPagina() {
   if (formCurso) formCurso.addEventListener("submit", event => {
     event.preventDefault();
     cursosCadastrados.push({ id: Date.now(), nome: document.querySelector("#nome-curso").value.trim(), cargaHoraria: Number(document.querySelector("#carga-horaria").value), status: document.querySelector("#status").value });
+    salvarDados(STORAGE_KEYS.cursos, cursosCadastrados);
     window.location.href = "cursos.html";
   });
 
@@ -216,6 +218,7 @@ function iniciarPagina() {
     formMatricula.addEventListener("submit", event => {
       event.preventDefault();
       matriculas.push({ id: matriculas.length + 1, aluno: alunoSelect.value, curso: cursoSelect.value, status: document.querySelector("#status").value });
+      salvarDados(STORAGE_KEYS.matriculas, matriculas);
       window.location.href = "matriculas.html";
     });
   }
@@ -224,6 +227,7 @@ function iniciarPagina() {
   if (formUsuario) formUsuario.addEventListener("submit", event => {
     event.preventDefault();
     usuarios.push({ id: Date.now(), nome: document.querySelector("#nome-usuario").value.trim(), perfil: document.querySelector("#perfil").value, status: document.querySelector("#status").value });
+    salvarDados(STORAGE_KEYS.usuarios, usuarios);
     window.location.href = "usuarios.html";
   });
 }
